@@ -167,4 +167,8 @@ Public Class Artist
 
         MessageBox.Show("Export Completed!")
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Call ImportToExcel(Me.DataGridView1, "Template.xlsx")
+    End Sub
 End Class
