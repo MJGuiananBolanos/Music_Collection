@@ -9,7 +9,7 @@ Module Module1
 
     Public currentDate As Date = Date.Now
     Public strpassword = "sultan"
-    Public xlsPath As String = "C:\Programming Codes\Visual Studio\EDP Project\Music_Collectionn\Templates\"
+    Public xlsPath As String = "C:\Programming Codes\Visual Studio\EDP Project\Music_Collection\Templates\"
     Public xlsFiles As String = "C:\Programming Codes\Visual Studio\EDP Project\Music_Collection\Templates\Save Here\"
 
     Public Sub Connect_to_DB()
@@ -37,7 +37,7 @@ Module Module1
         myconn.Dispose()
     End Sub
 
-    Public Sub ImportToExcel(mydg As DataGridView, templatefilename As String)
+    Public Sub ExportToExcel(mydg As DataGridView, templatefilename As String)
         Dim xlsApp As Excel.Application
         Dim xlsWB As Excel.Workbook
         Dim xlsSheet As Excel.Worksheet
@@ -52,10 +52,10 @@ Module Module1
         Dim x, y As Integer
         For x = 0 To mydg.RowCount - 1
             For y = 0 To mydg.ColumnCount - 1
-                xlsSheet.Cells(x + 2, y + 1) = mydg.Rows(x).Cells(y).Value
+                xlsSheet.Cells(x + 6, y + 1) = mydg.Rows(x).Cells(y).Value
             Next
         Next
-        With xlsSheet.Range(convertToLetters(1) & 2, convertToLetters(mydg.ColumnCount) & x + 4)
+        With xlsSheet.Range(convertToLetters(1) & 6, convertToLetters(mydg.ColumnCount) & x + 5)
             .Borders(Excel.XlBordersIndex.xlEdgeTop).LineStyle = Excel.XlLineStyle.xlContinuous
             .Borders(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous
             .Borders(Excel.XlBordersIndex.xlInsideHorizontal).LineStyle = Excel.XlLineStyle.xlContinuous

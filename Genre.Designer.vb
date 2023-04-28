@@ -25,11 +25,11 @@ Partial Class Genre
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Bckbtn = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Import = New System.Windows.Forms.Button()
         Me.Display = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -40,9 +40,7 @@ Partial Class Genre
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -75,65 +73,67 @@ Partial Class Genre
         '
         Me.Panel2.BackgroundImage = Global.Music_Collection.My.Resources.Resources.pexels_jessica_lewis_creative_583843
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.TextBox2)
-        Me.Panel2.Controls.Add(Me.PictureBox2)
         Me.Panel2.Location = New System.Drawing.Point(60, 257)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(397, 100)
         Me.Panel2.TabIndex = 42
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Showcard Gothic", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label3.Location = New System.Drawing.Point(26, 25)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(66, 23)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Genre"
         '
         'TextBox2
         '
         Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox2.Font = New System.Drawing.Font("Cambria", 16.2!)
         Me.TextBox2.ForeColor = System.Drawing.Color.Black
-        Me.TextBox2.Location = New System.Drawing.Point(97, 34)
+        Me.TextBox2.Location = New System.Drawing.Point(30, 51)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(272, 32)
+        Me.TextBox2.Size = New System.Drawing.Size(339, 32)
         Me.TextBox2.TabIndex = 3
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.BackgroundImage = Global.Music_Collection.My.Resources.Resources.user_regular_24
-        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox2.Location = New System.Drawing.Point(27, 23)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(64, 57)
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
         '
         'Panel1
         '
         Me.Panel1.BackgroundImage = Global.Music_Collection.My.Resources.Resources.pexels_jessica_lewis_creative_583843
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.TextBox1)
-        Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Location = New System.Drawing.Point(60, 151)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(397, 100)
         Me.Panel1.TabIndex = 41
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Showcard Gothic", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(26, 25)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(89, 23)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Genre ID"
         '
         'TextBox1
         '
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Font = New System.Drawing.Font("Cambria", 16.2!)
         Me.TextBox1.ForeColor = System.Drawing.Color.Black
-        Me.TextBox1.Location = New System.Drawing.Point(97, 35)
+        Me.TextBox1.Location = New System.Drawing.Point(30, 51)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(272, 32)
+        Me.TextBox1.Size = New System.Drawing.Size(339, 32)
         Me.TextBox1.TabIndex = 3
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.BackgroundImage = Global.Music_Collection.My.Resources.Resources.id_card_regular_24
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox1.Location = New System.Drawing.Point(27, 23)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(64, 57)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
         '
         'Import
         '
@@ -266,10 +266,8 @@ Partial Class Genre
         Me.Text = "Genre"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -280,10 +278,8 @@ Partial Class Genre
     Friend WithEvents Bckbtn As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Import As Button
     Friend WithEvents Display As Button
     Friend WithEvents DataGridView1 As DataGridView
@@ -293,4 +289,6 @@ Partial Class Genre
     Friend WithEvents Label1 As Label
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
 End Class

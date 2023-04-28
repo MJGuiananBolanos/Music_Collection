@@ -132,49 +132,6 @@ Public Class Genre
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Call Connect_to_DB()
-        Using connection As New MySqlConnection(myConnectionString)
-            connection.Open()
-
-            'Select all rows from the table
-            Dim selectSql As String = "select * from genre"
-            Dim selectCommand As New MySqlCommand(selectSql, connection)
-            Dim adapter As New MySqlDataAdapter(selectCommand)
-            Dim dt As New DataTable()
-            adapter.Fill(dt)
-
-            'Prompt the user to choose a location to save the CSV file
-            Dim saveFileDialog As New SaveFileDialog()
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv"
-            saveFileDialog.Title = "Export CSV file"
-            If saveFileDialog.ShowDialog() <> DialogResult.OK Then
-                Exit Sub
-            End If
-
-            'Write the contents of the DataTable to the CSV file
-            Using writer As New StreamWriter(saveFileDialog.FileName)
-                'Write the column headers
-                For i As Integer = 0 To dt.Columns.Count - 1
-                    writer.Write(dt.Columns(i).ColumnName)
-                    If i < dt.Columns.Count - 1 Then
-                        writer.Write(",")
-                    End If
-                Next
-                writer.WriteLine()
-
-                'Write the data rows
-                For Each row As DataRow In dt.Rows
-                    For i As Integer = 0 To dt.Columns.Count - 1
-                        writer.Write(row(i).ToString())
-                        If i < dt.Columns.Count - 1 Then
-                            writer.Write(",")
-                        End If
-                    Next
-                    writer.WriteLine()
-                Next
-            End Using
-        End Using
-
-        MsgBox("Export Completed!")
+        Call ExportToExcel(Me.DataGridView1, "GenreTemp.xlsx")
     End Sub
 End Class

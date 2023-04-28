@@ -74,7 +74,9 @@ Public Class Music
         Me.DataGridView1.Rows.Clear()
         Dim strsql As String
         Dim mycmd As New MySqlCommand
-        strsql = "Select * from music"
+        strsql = "Select music.music_id,music.music_title,music.download_count,artist.artist_name,genre.genre_type,writer.writer_name,producer.producer_name
+                    from music, artist, producer, writer, genre
+                    where music.artist_id = artist.artist_id and music.genre_id = genre.genre_id and music.producer_id = producer.producer_id and music.writer_id = writer.writer_id"
         Call Connect_to_DB()
         With mycmd
             .Connection = myconn
@@ -84,7 +86,7 @@ Public Class Music
         Dim myreader As MySqlDataReader
         myreader = mycmd.ExecuteReader
         While myreader.Read()
-            Me.DataGridView1.Rows.Add(New Object() {myreader.Item("music_id"), myreader.Item("music_title"), myreader.Item("download_count"), myreader.Item("artist_id"), myreader.Item("genre_id"), myreader.Item("writer_id"), myreader.Item("producer_id")})
+            Me.DataGridView1.Rows.Add(New Object() {myreader.Item("music_id"), myreader.Item("music_title"), myreader.Item("download_count"), myreader.Item("artist_name"), myreader.Item("genre_type"), myreader.Item("writer_name"), myreader.Item("producer_name")})
         End While
         Call Disconnect_to_DB()
     End Sub
@@ -140,50 +142,7 @@ Public Class Music
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Call Connect_to_DB()
-        Using connection As New MySqlConnection(myConnectionString)
-            connection.Open()
-
-            'Select all rows from the table
-            Dim selectSql As String = "select * from music"
-            Dim selectCommand As New MySqlCommand(selectSql, connection)
-            Dim adapter As New MySqlDataAdapter(selectCommand)
-            Dim dt As New DataTable()
-            adapter.Fill(dt)
-
-            'Prompt the user to choose a location to save the CSV file
-            Dim saveFileDialog As New SaveFileDialog()
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv"
-            saveFileDialog.Title = "Export CSV file"
-            If saveFileDialog.ShowDialog() <> DialogResult.OK Then
-                Exit Sub
-            End If
-
-            'Write the contents of the DataTable to the CSV file
-            Using writer As New StreamWriter(saveFileDialog.FileName)
-                'Write the column headers
-                For i As Integer = 0 To dt.Columns.Count - 1
-                    writer.Write(dt.Columns(i).ColumnName)
-                    If i < dt.Columns.Count - 1 Then
-                        writer.Write(",")
-                    End If
-                Next
-                writer.WriteLine()
-
-                'Write the data rows
-                For Each row As DataRow In dt.Rows
-                    For i As Integer = 0 To dt.Columns.Count - 1
-                        writer.Write(row(i).ToString())
-                        If i < dt.Columns.Count - 1 Then
-                            writer.Write(",")
-                        End If
-                    Next
-                    writer.WriteLine()
-                Next
-            End Using
-        End Using
-
-        MessageBox.Show("Export Completed!")
+        Call ExportToExcel(Me.DataGridView1, "MusicTemp.xlsx")
     End Sub
 
 End Class

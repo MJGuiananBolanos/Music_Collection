@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Runtime.InteropServices
 Imports MySql.Data.MySqlClient
 
 Public Class Artist
@@ -128,47 +129,6 @@ Public Class Artist
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Call Connect_to_DB()
-        Using connection As New MySqlConnection(myConnectionString)
-            connection.Open()
-
-            Dim selectSql As String = "select * from artist"
-            Dim selectCommand As New MySqlCommand(selectSql, connection)
-            Dim adapter As New MySqlDataAdapter(selectCommand)
-            Dim dt As New DataTable()
-            adapter.Fill(dt)
-
-            Dim saveFileDialog As New SaveFileDialog()
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv"
-            saveFileDialog.Title = "Export CSV file"
-            If saveFileDialog.ShowDialog() <> DialogResult.OK Then
-                Exit Sub
-            End If
-
-            Using writer As New StreamWriter(saveFileDialog.FileName)
-                For i As Integer = 0 To dt.Columns.Count - 1
-                    writer.Write(dt.Columns(i).ColumnName)
-                    If i < dt.Columns.Count - 1 Then
-                        writer.Write(",")
-                    End If
-                Next
-                writer.WriteLine()
-                For Each row As DataRow In dt.Rows
-                    For i As Integer = 0 To dt.Columns.Count - 1
-                        writer.Write(row(i).ToString())
-                        If i < dt.Columns.Count - 1 Then
-                            writer.Write(",")
-                        End If
-                    Next
-                    writer.WriteLine()
-                Next
-            End Using
-        End Using
-
-        MessageBox.Show("Export Completed!")
-    End Sub
-
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Call ImportToExcel(Me.DataGridView1, "Template.xlsx")
+        Call ExportToExcel(Me.DataGridView1, "ArtistsTemp.xlsx")
     End Sub
 End Class

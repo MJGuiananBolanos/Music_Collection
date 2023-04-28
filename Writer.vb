@@ -67,7 +67,9 @@ Public Class Writer
         Me.DataGridView1.Rows.Clear()
         Dim strsql As String
         Dim mycmd As New MySqlCommand
-        strsql = "Select * from writer"
+        strsql = "Select writer.writer_id, writer.writer_name, music.music_title
+                    from writer, music
+                    where writer.writer_id = music.writer_id"
         Call Connect_to_DB()
         With mycmd
             .Connection = myconn
@@ -77,7 +79,7 @@ Public Class Writer
         Dim myreader As MySqlDataReader
         myreader = mycmd.ExecuteReader
         While myreader.Read()
-            Me.DataGridView1.Rows.Add(New Object() {myreader.Item("writer_id"), myreader.Item("writer_name"), myreader.Item("artist_id")})
+            Me.DataGridView1.Rows.Add(New Object() {myreader.Item("writer_id"), myreader.Item("writer_name"), myreader.Item("music_title")})
         End While
         Call Disconnect_to_DB()
     End Sub
@@ -129,43 +131,6 @@ Public Class Writer
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Call Connect_to_DB()
-        Using connection As New MySqlConnection(myConnectionString)
-            connection.Open()
-            Dim selectSql As String = "select * from writer"
-            Dim selectCommand As New MySqlCommand(selectSql, connection)
-            Dim adapter As New MySqlDataAdapter(selectCommand)
-            Dim dt As New DataTable()
-            adapter.Fill(dt)
-
-            Dim saveFileDialog As New SaveFileDialog()
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv"
-            saveFileDialog.Title = "Export CSV file"
-            If saveFileDialog.ShowDialog() <> DialogResult.OK Then
-                Exit Sub
-            End If
-
-            Using writer As New StreamWriter(saveFileDialog.FileName)
-                For i As Integer = 0 To dt.Columns.Count - 1
-                    writer.Write(dt.Columns(i).ColumnName)
-                    If i < dt.Columns.Count - 1 Then
-                        writer.Write(",")
-                    End If
-                Next
-                writer.WriteLine()
-
-                For Each row As DataRow In dt.Rows
-                    For i As Integer = 0 To dt.Columns.Count - 1
-                        writer.Write(row(i).ToString())
-                        If i < dt.Columns.Count - 1 Then
-                            writer.Write(",")
-                        End If
-                    Next
-                    writer.WriteLine()
-                Next
-            End Using
-        End Using
-
-        MessageBox.Show("Export Completed!")
+        Call ExportToExcel(Me.DataGridView1, "WriterTemp.xlsx")
     End Sub
 End Class
